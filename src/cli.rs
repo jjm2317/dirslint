@@ -19,8 +19,6 @@ impl Cli {
         } else {
             option.insert("config".to_string(), "ds-lint.yml".to_string());
         }
-        Cli {
-            option: HashMap::new(),
-        }
+        Cli { option }
     }
 }

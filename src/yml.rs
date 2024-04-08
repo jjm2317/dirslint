@@ -20,7 +20,6 @@ impl YmlParser {
     pub fn new(filename: &str) -> YmlParser {
         let content = std::fs::read_to_string(filename).unwrap();
         let yml_rule = serde_yaml::from_str::<YmlRule>(&content).unwrap();
-        println!("{:#?}", yml_rule);
         let parser = YmlParser {
             filename: filename.to_string(),
             content,
