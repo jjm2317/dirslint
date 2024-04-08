@@ -1,0 +1,26 @@
+use std::{collections::HashMap, env};
+
+pub struct Cli {
+    pub option: HashMap<String, String>,
+}
+
+impl Cli {
+    pub fn new(args: Vec<String>) -> Cli {
+        let mut option = HashMap::new();
+        // if args has config flag insert value to config key
+        let config_position = args.iter().position(|x| x == "--config");
+        println!("{:?}", config_position);
+        if config_position != None {
+            option.insert(
+                "config".to_string(),
+                args[config_position.unwrap() + 1].clone(),
+            );
+            println!("{:?}", option);
+        } else {
+            option.insert("config".to_string(), "ds-lint.yml".to_string());
+        }
+        Cli {
+            option: HashMap::new(),
+        }
+    }
+}
