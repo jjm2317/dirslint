@@ -41,7 +41,7 @@ impl YmlParser {
 mod test {
     use std::collections::HashMap;
 
-    use crate::yml_parser::YmlRule;
+    use crate::yml::YmlRule;
 
     use super::YmlParser;
 
