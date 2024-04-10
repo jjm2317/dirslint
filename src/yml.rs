@@ -5,8 +5,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub struct YmlRule {
     pub ds: HashMap<String, Vec<String>>,
-    target: Vec<String>,
-    ignore: Vec<String>,
+    pub target: Vec<String>,
+    pub ignore: Vec<String>,
 }
 
 pub struct YmlParser {
@@ -59,9 +59,16 @@ mod test {
         );
         let expected_yml_rule: YmlRule = YmlRule {
             ds,
-            target: vec!["src/*".to_string(), "./".to_string()],
-            ignore: vec!["node_modules".to_string(), ".env*".to_string()],
+            target: vec!["src/*".to_string(), "./**".to_string()],
+            ignore: vec![
+                "node_modules".to_string(),
+                ".env*".to_string(),
+                "target/**".to_string(),
+                ".git*".to_string(),
+                ".git/**".to_string(),
+            ],
         };
+
         assert_eq!(
             expected_yml_rule, yml_parser.yml_rule,
             "parsed yml rule is not valid expected {:?}, got {:?}",

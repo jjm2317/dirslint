@@ -5,8 +5,11 @@ ds:
 # 검사할 타겟 지정
 target: 
 - src/* # src 하위 전체
-- ./ # 1뎁스
+- ./**
 
 ignore: 
 - node_modules
 - .env*
+- target/**
+- .git*
+- .git/**
