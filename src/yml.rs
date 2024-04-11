@@ -46,7 +46,7 @@ mod test {
 
     #[test]
     fn test_constructor() {
-        let yml_parser = YmlParser::new("./src/test.yml");
+        let yml_parser = YmlParser::new("./src/mock/test.yml");
         let mut ds: HashMap<String, Vec<String>> = HashMap::new();
         ds.insert(
             String::from("src/[hook|components]/*"),
