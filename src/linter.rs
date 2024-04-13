@@ -15,11 +15,10 @@ struct Linter {
 }
 
 impl Linter {
-    fn new(yml_rule: YmlRule) -> Linter {
-        let glob_parser = GlobParser::new(yml_rule);
+    fn new(yml_rule: &YmlRule) -> Linter {
         Linter {
-            rule: yml_rule,
-            target_files: glob_parser.get_all_target_files(),
+            rule: yml_rule.clone(),
+            target_files: GlobParser::get_all_target_files(yml_rule),
             messages: vec![],
         }
     }
