@@ -1,6 +1,8 @@
 use std::env;
 
 pub mod cli;
+pub mod glob;
+pub mod linter;
 pub mod yml;
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -9,6 +11,5 @@ fn main() {
 
     let config_file_path = cli.option.get("config");
 
-    let parser = yml::YmlParser::new(config_file_path.unwrap());
-    println!("{:?}", parser.yml_rule);
+    let yml_parser = yml::YmlParser::new(config_file_path.unwrap());
 }
