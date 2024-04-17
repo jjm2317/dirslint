@@ -6,6 +6,7 @@ use crate::yml::YmlRule;
 
 pub struct GlobParser {
     get_all_target_files: fn(YmlRule) -> Vec<String>,
+    is_file_match_pattern: fn(&str, &str) -> bool,
 }
 
 impl GlobParser {
@@ -29,6 +30,22 @@ impl GlobParser {
     }
 
     pub fn is_file_match_pattern(filename: &str, pattern: &str) -> bool {
+        println!("{:?} {:?}", filename, pattern);
+        /*
+         * return true if filename's last path match pattern.
+         * e.g.
+         * - "src/mock/test.yml" match pattern "test.yml"
+         * - "src/mock/success" match pattern "success"
+         */
+        if filename.contains("/") {
+            let last_path = filename.split("/").last().unwrap();
+            if Pattern::new(pattern)
+                .unwrap()
+                .matches_path(Path::new(last_path))
+            {
+                return true;
+            }
+        }
         Pattern::new(pattern)
             .unwrap()
             .matches_path(Path::new(filename))
@@ -73,5 +90,16 @@ mod test {
             "file is not match pattern expected {:?}, got {:?}",
             true, result,
         );
+
+        let dirname = "src/mock/success";
+        let dirs = ["src/mock/success", "success"];
+        for (idx, dir) in dirs.iter().enumerate() {
+            let dir_result = GlobParser::is_file_match_pattern(dirname, dir);
+            assert_eq!(
+                true, dir_result,
+                "dir {:?} is not match pattern {:?} expected {:?}, got {:?}",
+                dirname, dir, true, dir_result,
+            )
+        }
     }
 }
