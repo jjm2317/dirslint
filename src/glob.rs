@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::{collections::HashSet, path::Path};
 
 use glob::{glob, Pattern};
 
@@ -27,6 +27,12 @@ impl GlobParser {
         }
         Vec::from_iter(result)
     }
+
+    pub fn is_file_match_pattern(filename: &str, pattern: &str) -> bool {
+        Pattern::new(pattern)
+            .unwrap()
+            .matches_path(Path::new(filename))
+    }
 }
 
 #[cfg(test)]
@@ -54,6 +60,18 @@ mod test {
             expected_result, result,
             "target files are not valid expected {:?}, got {:?}",
             expected_result, result,
+        );
+    }
+    #[test]
+    fn test_is_file_match_pattern() {
+        let filename = "src/mock/test.yml";
+        let pattern = "*.yml";
+        let result = GlobParser::is_file_match_pattern(filename, pattern);
+
+        assert_eq!(
+            true, result,
+            "file is not match pattern expected {:?}, got {:?}",
+            true, result,
         );
     }
 }
