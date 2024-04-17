@@ -29,7 +29,7 @@ impl GlobParser {
         Vec::from_iter(result)
     }
 
-    pub fn is_file_match_pattern(filename: &str, pattern: &str) -> bool {
+    pub fn is_file_match_pattern(filename: &str, pattern: &str, is_strict: Option<bool>) -> bool {
         println!("{:?} {:?}", filename, pattern);
         /*
          * return true if filename's last path match pattern.
@@ -37,7 +37,7 @@ impl GlobParser {
          * - "src/mock/test.yml" match pattern "test.yml"
          * - "src/mock/success" match pattern "success"
          */
-        if filename.contains("/") {
+        if filename.contains("/") && !is_strict.unwrap_or(false) {
             let last_path = filename.split("/").last().unwrap();
             if Pattern::new(pattern)
                 .unwrap()
@@ -83,7 +83,7 @@ mod test {
     fn test_is_file_match_pattern() {
         let filename = "src/mock/test.yml";
         let pattern = "*.yml";
-        let result = GlobParser::is_file_match_pattern(filename, pattern);
+        let result = GlobParser::is_file_match_pattern(filename, pattern, Some(true));
 
         assert_eq!(
             true, result,
@@ -93,8 +93,8 @@ mod test {
 
         let dirname = "src/mock/success";
         let dirs = ["src/mock/success", "success"];
-        for (idx, dir) in dirs.iter().enumerate() {
-            let dir_result = GlobParser::is_file_match_pattern(dirname, dir);
+        for dir in dirs.iter() {
+            let dir_result = GlobParser::is_file_match_pattern(dirname, dir, None);
             assert_eq!(
                 true, dir_result,
                 "dir {:?} is not match pattern {:?} expected {:?}, got {:?}",
