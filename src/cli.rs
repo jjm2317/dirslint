@@ -17,7 +17,7 @@ impl Cli {
             );
             println!("{:?}", option);
         } else {
-            option.insert("config".to_string(), "ds-lint.yml".to_string());
+            option.insert("config".to_string(), "dslint.yml".to_string());
         }
         Cli { option }
     }
