@@ -30,7 +30,6 @@ impl GlobParser {
     }
 
     pub fn is_file_match_pattern(filename: &str, pattern: &str, is_strict: Option<bool>) -> bool {
-        println!("{:?} {:?}", filename, pattern);
         /*
          * return true if filename's last path match pattern.
          * e.g.
@@ -87,8 +86,8 @@ mod test {
 
         assert_eq!(
             true, result,
-            "file is not match pattern expected {:?}, got {:?}",
-            true, result,
+            "file {:?} is not match pattern {:?}",
+            filename, pattern
         );
 
         let dirname = "src/mock/success";
