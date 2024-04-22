@@ -3,19 +3,19 @@
 
 use crate::{glob::GlobParser, yml::YmlRule};
 
-struct LintMessage {
+pub struct LintMessage {
     file: String,
-    message: String,
+    pub message: String,
 }
 
-struct Linter {
+pub struct Linter {
     rule: YmlRule,
     target_files: Vec<String>,
     messages: Vec<LintMessage>,
 }
 
 impl Linter {
-    fn new(yml_rule: YmlRule) -> Linter {
+    pub fn new(yml_rule: YmlRule) -> Linter {
         Linter {
             rule: yml_rule.clone(),
             target_files: GlobParser::get_all_target_files(&yml_rule),
@@ -23,7 +23,7 @@ impl Linter {
         }
     }
 
-    fn verify(&self) -> Vec<LintMessage> {
+    pub fn verify(&self) -> Vec<LintMessage> {
         let mut messages = vec![];
 
         for target_file in self.target_files.iter() {
