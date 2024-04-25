@@ -3,7 +3,7 @@ name = "dslint"
 authors = ["Jiman Jeong"]
 description = "Directory Structure Lint"
 repository = "https://github.com/jjm2317/dslint"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2021"
 license = "MIT"
 
