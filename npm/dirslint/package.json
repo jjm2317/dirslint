@@ -1,7 +1,7 @@
 {
   "name": "dirslint",
   "version": "0.0.4",
-  "repository": "https://github.com/jjm2317/dslint.git",
+  "repository": "https://github.com/jjm2317/dirslint.git",
   "author": "jjm2317 <wlaks2317@gmail.com>",
   "license": "MIT",
   "scripts": {

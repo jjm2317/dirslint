@@ -1,4 +1,4 @@
-# dslint
+# dirslint
 
 The linter for directory structure convention written in Rust
 

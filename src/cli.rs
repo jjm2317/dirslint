@@ -15,7 +15,7 @@ impl Cli {
                 args[config_position.unwrap() + 1].clone(),
             );
         } else {
-            option.insert("config".to_string(), "dslint.yml".to_string());
+            option.insert("config".to_string(), "dirslint.yml".to_string());
         }
         Cli { option }
     }

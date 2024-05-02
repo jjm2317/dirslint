@@ -1,8 +1,8 @@
 [package]
-name = "dslint"
+name = "dirslint"
 authors = ["Jiman Jeong"]
 description = "Directory Structure Lint"
-repository = "https://github.com/jjm2317/dslint"
+repository = "https://github.com/jjm2317/dirslint"
 version = "0.0.2"
 edition = "2021"
 license = "MIT"

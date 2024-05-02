@@ -3,7 +3,7 @@
 version = 3
 
 [[package]]
-name = "dslint"
+name = "dirslint"
 version = "0.0.2"
 dependencies = [
  "glob",
