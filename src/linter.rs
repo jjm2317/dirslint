@@ -40,12 +40,11 @@ impl Linter {
                         messages.push(LintMessage {
                             file: target_file.clone(),
                             message: format!(
-                                "file {:?} in {:?} don't satisfy rule {:?}",
+                                "file {:} in {:} doesn't satisfy rule {:?}",
                                 target_file,
                                 key,
                                 self.rule.ds.get(key).unwrap()
-                            )
-                            .to_string(),
+                            ),
                         });
                     }
                 }

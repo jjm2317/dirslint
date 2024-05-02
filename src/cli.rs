@@ -9,13 +9,11 @@ impl Cli {
         let mut option = HashMap::new();
         // if args has config flag insert value to config key
         let config_position = args.iter().position(|x| x == "--config");
-        println!("{:?}", config_position);
         if config_position != None {
             option.insert(
                 "config".to_string(),
                 args[config_position.unwrap() + 1].clone(),
             );
-            println!("{:?}", option);
         } else {
             option.insert("config".to_string(), "dslint.yml".to_string());
         }
