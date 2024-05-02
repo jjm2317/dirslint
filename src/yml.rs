@@ -54,7 +54,7 @@ mod test {
         );
 
         ds.insert(
-            String::from("**/src/"),
+            String::from("**/src/**"),
             vec![String::from("use*.(ts|tsx|js|jsx)"), String::from("")],
         );
         let expected_yml_rule: YmlRule = YmlRule {

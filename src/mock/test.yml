@@ -1,5 +1,5 @@
 ds:
-  "**/src/": ["use*.(ts|tsx|js|jsx)", ""]
+  "**/src/**": ["use*.(ts|tsx|js|jsx)", ""]
   src/[hook|components]/*: ["*.(ts|tsx|js|jsx)", ""] 
 
 # 검사할 타겟 지정
