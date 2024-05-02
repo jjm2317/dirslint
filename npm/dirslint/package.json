@@ -1,0 +1,17 @@
+{
+  "name": "dirslint",
+  "version": "0.0.4",
+  "repository": "https://github.com/jjm2317/dslint.git",
+  "author": "jjm2317 <wlaks2317@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+
+  },
+  "bin": "lib/index.js",
+  "dependencies": {
+  },
+  "optionalDependencies": {
+    "dirslint-darwin-arm64": "^0.0.4"
+  }
+  
+}

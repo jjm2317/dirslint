@@ -1,0 +1,6 @@
+{
+  "name": "dirslint-darwin-arm64",
+  "version": "0.0.4",
+  "os": ["darwin"],
+  "cpu": ["arm64"]
+}
