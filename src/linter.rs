@@ -77,11 +77,65 @@ mod test {
                 "src/mock/ignore".to_string(),
             ],
         };
-        let linter = Linter::new(rule.clone(), GlobParser::get_all_target_files(&rule));
+        let target_files = GlobParser::get_all_target_files(&rule);
+
+        let linter = Linter::new(rule.clone(), target_files);
         let expected = [LintMessage {
             file: "src/mock/fail".to_string(),
             message: "".to_string(),
         }];
+
+        let result = linter.verify();
+
+        assert!(result.len() > 0, "expected vec len {:?}", result.len());
+
+        for (idx, message) in result.into_iter().enumerate() {
+            assert_eq!(
+                expected[idx].file, message.file,
+                "file wrong, expected {:?} got {:?}",
+                expected[idx].file, message.file
+            );
+        }
+    }
+    #[test]
+    fn test_verify_practal() {
+        let mut ds = HashMap::new();
+        ds.insert(
+            "**/practal/*".to_string(),
+            vec!["practal1.txt".to_string(), "practal2.yml".to_string()],
+        );
+        ds.insert("**/hooks/*".to_string(), vec!["use*.ts".to_string()]);
+        let rule = YmlRule {
+            ds,
+            target: vec!["**".to_string()],
+            ignore: vec![
+                "src/mock/ignore/**".to_string(),
+                "src/mock/ignore".to_string(),
+            ],
+        };
+        let target_files = vec![
+            "src/mock/practal/practal1.txt".to_string(),
+            "practal/practal3.txt".to_string(),
+            "features/a/hooks/useHooks.ts".to_string(),
+            "features/b/hooks/hook1.ts".to_string(),
+            "hooks/hook2.ts".to_string(),
+        ];
+
+        let linter = Linter::new(rule.clone(), target_files);
+        let expected = [
+            LintMessage {
+                file: "practal/practal3.txt".to_string(),
+                message: "".to_string(),
+            },
+            LintMessage {
+                file: "features/b/hooks/hook1.ts".to_string(),
+                message: "".to_string(),
+            },
+            LintMessage {
+                file: "hooks/hook2.ts".to_string(),
+                message: "".to_string(),
+            },
+        ];
 
         let result = linter.verify();
 
