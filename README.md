@@ -35,7 +35,7 @@ ds:
   src/**/*: ["app", "components", "*.ts" ]
 
   # Example for Fractal Directory Structure
-  "**/src/**": ["app", "components", "*.ts" ]
+  "**/hooks/*.ts": ["use*.ts" ]
 
 
 # Linting Target
@@ -44,7 +44,7 @@ target:
 
 # Ignore specific folders & files
 ignore:
-- node_modules
+- node_modules*
 - .env*
 - .git*
 - .git/**
