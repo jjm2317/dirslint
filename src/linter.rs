@@ -15,10 +15,10 @@ pub struct Linter {
 }
 
 impl Linter {
-    pub fn new(yml_rule: YmlRule) -> Linter {
+    pub fn new(yml_rule: YmlRule, target_files: Vec<String>) -> Linter {
         Linter {
             rule: yml_rule.clone(),
-            target_files: GlobParser::get_all_target_files(&yml_rule),
+            target_files: target_files,
             messages: vec![],
         }
     }
@@ -58,7 +58,7 @@ impl Linter {
 mod test {
     use std::collections::HashMap;
 
-    use crate::yml::YmlRule;
+    use crate::{glob::GlobParser, yml::YmlRule};
 
     use super::{LintMessage, Linter};
 
@@ -77,7 +77,7 @@ mod test {
                 "src/mock/ignore".to_string(),
             ],
         };
-        let linter = Linter::new(rule);
+        let linter = Linter::new(rule.clone(), GlobParser::get_all_target_files(&rule));
         let expected = [LintMessage {
             file: "src/mock/fail".to_string(),
             message: "".to_string(),

@@ -1,5 +1,7 @@
 use std::env;
 
+use glob::GlobParser;
+
 pub mod cli;
 pub mod glob;
 pub mod linter;
@@ -13,7 +15,10 @@ fn main() {
 
     let yml_parser = yml::YmlParser::new(config_file_path.unwrap());
 
-    let linter = linter::Linter::new(yml_parser.yml_rule);
+    let linter = linter::Linter::new(
+        yml_parser.yml_rule.clone(),
+        GlobParser::get_all_target_files(&yml_parser.yml_rule),
+    );
 
     let messages = linter.verify();
 
