@@ -57,20 +57,23 @@ mod test {
 
     #[test]
     fn test_get_all_target_files() {
-        let expected_result = vec![
+        let mut expected_result = vec![
             "src/mock/test.yml".to_string(),
             "src/mock/a.txt".to_string(),
-        ]
-        .sort();
+        ];
+        expected_result.sort();
         let rule = YmlRule {
             ds: std::collections::HashMap::new(),
             target: vec!["src/mock/**/*".to_string()],
             ignore: vec![
-                "src/mock/ignore/**".to_string(),
+                "src/mock/ignore/*".to_string(),
                 "src/mock/ignore".to_string(),
+                "src/mock/fail/*".to_string(),
+                "src/mock/fail".to_string(),
             ],
         };
-        let result = GlobParser::get_all_target_files(&rule).sort();
+        let mut result = GlobParser::get_all_target_files(&rule);
+        result.sort();
 
         assert_eq!(
             expected_result, result,
